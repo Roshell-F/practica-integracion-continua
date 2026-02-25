@@ -1,0 +1,21 @@
+name: Alerta Integracion Continua
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Enviar notificacion a ntfy
+        run: |
+          curl -H "Title: Nuevo Push en Main" \
+               -H "Priority: high" \
+               -d "Se subio codigo al repositorio correctamente 🚀" \
+               https://ntfy.sh/devops-itla
